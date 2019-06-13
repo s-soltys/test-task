@@ -1,0 +1,26 @@
+<div class="container-fluid">
+
+    <div class="row">
+      <div class="col"> <p>Invoices List</p> </div>
+      <div class="col"> <a routerLink = "/new-invoice"> 
+        <button class="btn" style="background-color: #CFE2F3; float: right;">Add new Invoices</button> </a></div>
+    </div>
+
+    <div class="row" style="border-top: 1px solid #DCDCDC;">
+      <div class="col-2"> <p>Date</p> </div>
+      <div class="col-2"> <p>Title</p> </div>
+      <div class="col-2"> <p>Amount</p> </div>
+      <div class="col-3"> <p>IBAN</p> </div>
+      <div class="col-1"> <p style="font-weight: bold;">Edit</p> </div>
+      <div class="col-1"> <p style="font-weight: bold;">Delete</p> </div>
+    </div>
+
+      <div class="row" *ngFor="let invoice of invoice" style="border-top: 1px solid #DCDCDC;">
+          <div class="col-2"> <p>{{invoice.date}}</p> </div>
+          <div class="col-2"> <p>{{invoice.subject}}</p> </div>
+          <div class="col-2"> <p>{{invoice.amount | currency:'EUR':true}}</p> </div>
+          <div class="col-3"> <p>{{invoice.account}}</p> </div>
+          <div class="col-1"> <p style="font-weight: bold;">Edit</p> </div>
+          <div class="col-1"> <p style="font-weight: bold;" (click)=deleteInvoice(invoice)>Delete</p> </div>
+      </div>
+</div>

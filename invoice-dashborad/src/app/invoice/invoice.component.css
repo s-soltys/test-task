@@ -1,0 +1,14 @@
+@media only screen and (min-width: 600px) { 
+    .container-fluid {
+        width: 60%; 
+        margin: auto; 
+        border: 1px solid #DCDCDC; 
+        padding-top: 15px; 
+        padding-bottom: 15px;
+    }
+}
+@media only screen and (max-width: 600px) { 
+    .container-fluid {
+        width: 100%;
+    }
+}

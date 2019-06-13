@@ -1,0 +1,231 @@
+<div class="container-fluid desktop">
+
+    <div class="row" style="background-color: #CCCCCC;">
+        <div class="col">
+          <p>Invoice Dialog</p>
+        </div>
+        <div class="col">
+          <a routerLink="/">
+            <svg style="float: right;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+          </a>
+        </div>
+      </div>
+
+  <div class="row">
+    <div class="col-3" style="border: 1px solid #DCDCDC; padding: 0;">
+        <div (click)="showPayment = true" style="border-bottom: 1px solid #DCDCDC; width: 100%; padding: 0 0 0 5px;">Invoice Information</div>
+        <div (click)="showPayment = !showPayment" style="border-bottom: 1px solid #DCDCDC; width: 100%; padding: 0 0 0 5px;">Payments</div>
+    </div>
+    <div class="col-9" style="text-align: center">
+
+        <div *ngIf="showPayment == true">
+              <div class="input-group mb-3" style="padding: 10px 0 0 0;">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Search IBAN</span>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+
+              <p>Found bank transfers</p>
+
+              <div class="row" style="border: 1px solid #DCDCDC; margin: 5px 10px;">
+                  <div class="col-3"> <p>Title</p> </div>
+                  <div class="col-3"> <p>Amount</p> </div>
+                  <div class="col-6"> <p>IBAN</p> </div>
+               </div>
+
+               <div class="row" *ngFor="let invoice of invoice" style="border: 1px solid #DCDCDC; margin: 5px 10px;">
+                  <div class="col-3"> <p>{{invoice.title}}</p> </div>
+                  <div class="col-3"> <p>{{invoice.amount}}</p> </div>
+                  <div class="col-6"> <p>{{invoice.iban}}</p> </div>
+              </div>
+
+              <div class="row">
+                  <button class="done">Done</button>
+              </div>
+          </div>
+        
+          <div *ngIf="showPayment == false">
+
+              <div class="input-group mb-3" style="padding: 10px 0 0 0;">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Date</span>
+                  </div>
+                  <input #date type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+
+                <div class="input-group mb-3" style="padding: 10px 0 0 0;">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">subject</span>
+                    </div>
+                    <input #subject type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  </div>
+
+                  <div class="input-group mb-3" style="padding: 10px 0 0 0;">
+                  <div class="custom-control custom-switch">
+                      <input #bank type="checkbox" class="custom-control-input" id="customSwitch1" [checked]="invoice.selected">
+                      <label class="custom-control-label" for="customSwitch1">Retrieve amount from the bank account</label>
+                    </div>
+
+                    <div class="input-group mb-3" style="padding: 10px 0 0 0;">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">Amount</span>
+                        </div>
+                        <input #amount type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                      </div>
+
+              <div class="row">
+                  <button (click) ="invoiceData(date.value, subject.value, bank.value, amount.value)" class="done">Done</button>
+              </div>
+          </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="accordion" id="accordionExample">
+
+    <div class="row" style="background-color: #CCCCCC;">
+        <div class="col">
+          <div class="invoice-dialog">Invoice Dialog</div>
+        </div>
+        <div class="col">
+          <a routerLink="/">
+            <svg style="float: right;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="invoice-info" (click)="showPayment = true">Invoice Information</div>
+          <div class="invoice-info" (click)="showPayment = !showPayment">Payments</div>
+      </div>
+
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            <span *ngIf="showPayment == true">Search IBAN</span>
+            <span *ngIf="showPayment == false">Date</span>
+          </button>
+        </h2>
+      </div>
+  
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+            <span *ngIf="showPayment ==true">
+                <div class="input-group mb-3" style="padding: 10px 0 0 0;">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Search IBAN</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  </div>
+            </span>
+            <span *ngIf="showPayment == false">
+                <div class="input-group mb-3" style="padding: 10px 0 0 0;">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Date</span>
+                    </div>
+                    <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  </div>
+            </span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+             <span *ngIf="showPayment == true">Bank Accounts</span>
+             <span *ngIf="showPayment == false">Subject</span>
+          </button>
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+            <span class="invoice-info" *ngIf="showPayment == true">
+            <p>Found bank transfers</p>
+            <div class="row" style="border: 1px solid #DCDCDC; margin: 5px 10px;">
+                <div class="col-3"> <p>Title</p> </div>
+                <div class="col-3"> <p>Amount</p> </div>
+                <div class="col-6"> <p>IBAN</p> </div>
+             </div>
+
+             <div class="row" *ngFor="let invoice of invoice" style="border: 1px solid #DCDCDC; margin: 5px 10px;">
+                <div class="col-3"> <p>{{invoice.title}}</p> </div>
+                <div class="col-3"> <p>{{invoice.amount}}</p> </div>
+                <div class="col-6"> <p>{{invoice.iban}}</p> </div>
+            </div>
+          </span>
+          <span *ngIf="showPayment == false">
+              <div class="input-group mb-3" style="padding: 10px 0 0 0;">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">subject</span>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+          </span>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="showPayment == false">
+        <div class="card-header" id="headingThree">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <span>Amount</span>
+            </button>
+          </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+          <div class="card-body">
+  
+              <div class="input-group mb-3" style="padding: 10px 0 0 0;">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Amount</span>
+                  </div>
+                  <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+  
+          </div>
+        </div>
+      </div>
+
+
+    <div class="row">
+        <button class="done">Done</button>
+    </div> 
+    
+  </div>-->
